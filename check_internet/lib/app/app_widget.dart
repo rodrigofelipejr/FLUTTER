@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:check_internet/app/app_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:asuka/asuka.dart' as asuka;
 
 class AppWidget extends StatefulWidget {
   @override
@@ -23,7 +22,6 @@ class _AppWidgetState extends ModularState<AppWidget, AppController> {
               primarySwatch: Colors.blue,
             ),
             initialRoute: '/',
-            builder: asuka.builder,
             onGenerateRoute: Modular.generateRoute,
           ),
         ),
