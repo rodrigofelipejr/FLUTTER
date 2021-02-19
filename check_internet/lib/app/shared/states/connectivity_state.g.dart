@@ -19,6 +19,22 @@ final $ConnectivityState = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ConnectivityState on _ConnectivityStateBase, Store {
+  final _$_connectivityStreamAtom =
+      Atom(name: '_ConnectivityStateBase._connectivityStream');
+
+  @override
+  ObservableStream<ConnectivityResult> get _connectivityStream {
+    _$_connectivityStreamAtom.reportRead();
+    return super._connectivityStream;
+  }
+
+  @override
+  set _connectivityStream(ObservableStream<ConnectivityResult> value) {
+    _$_connectivityStreamAtom.reportWrite(value, super._connectivityStream, () {
+      super._connectivityStream = value;
+    });
+  }
+
   final _$connectionStatusAtom =
       Atom(name: '_ConnectivityStateBase.connectionStatus');
 

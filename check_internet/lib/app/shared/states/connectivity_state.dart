@@ -11,28 +11,28 @@ part 'connectivity_state.g.dart';
 class ConnectivityState = _ConnectivityStateBase with _$ConnectivityState;
 
 abstract class _ConnectivityStateBase with Store {
-  StreamSubscription<ConnectivityResult> subscription;
   Timer _timer;
+  ReactionDisposer _disposer;
 
   _ConnectivityStateBase() {
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult connectivityResult) async {
+    _connectivityStream = ObservableStream(Connectivity().onConnectivityChanged);
+
+    _disposer = reaction((_) => _connectivityStream.value, (status) async {
       _timer?.cancel();
-      _timer = Timer(Duration(seconds: 4), () async {
-        _statusStream = connectivityResult != null && connectivityResult != ConnectivityResult.none;
-        if (_statusStream) {
-          await Future.delayed(Duration(seconds: 4));
-        }
+      _timer = Timer(Duration(seconds: 0), () async {
+        if (status != null && status != ConnectivityResult.none) await Future.delayed(Duration(seconds: 4));
         bool value = await _checkInternet();
         setConnectionStatus(value);
       });
-    });
+    }, delay: 4000);
   }
 
   void dispose() {
-    subscription.cancel();
+    _disposer();
   }
 
-  bool _statusStream;
+  @observable
+  ObservableStream<ConnectivityResult> _connectivityStream;
 
   @observable
   bool connectionStatus;
