@@ -11,8 +11,14 @@ abstract class _HomeControllerBase with Store {
   final ConnectivityState connectivityState;
 
   _HomeControllerBase(this.connectivityState) {
-    Future.delayed(Duration(seconds: 3)).then((_) => setLoading(false));
+    _disposer = reaction((_) => connectivityState.connectionStatus, (_) => setLoading(false));
   }
+
+  void dispose() {
+    _disposer();
+  }
+
+  ReactionDisposer _disposer;
 
   @observable
   bool loading = true;
