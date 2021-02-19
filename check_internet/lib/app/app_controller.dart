@@ -30,15 +30,15 @@ abstract class _AppControllerBase with Store {
 
   ReactionDisposer _disposer;
 
-  bool _initialConnectionState = false;
+  bool _firstCheck = true;
 
   @action
   Future<void> verifyConnection() async {
     _timer?.cancel();
 
-    if (connectivityState.getStatusConnection) {
-      if (!_initialConnectionState) {
-        _initialConnectionState = true;
+    if (connectivityState.connectionStatus != null && connectivityState.connectionStatus) {
+      if (_firstCheck) {
+        _firstCheck = false;
         return;
       }
 
@@ -55,11 +55,13 @@ abstract class _AppControllerBase with Store {
 
       height = _heightMin;
     } else {
+      if (connectivityState.connectionStatus == null) connectivityState.setConnectionStatus(false);
+
       message = "Por favor, verifique sua conexão com a internet";
       height = _heightMax;
       background = kRed;
 
-      _initialConnectionState = true;
+      _firstCheck = false;
     }
   }
 

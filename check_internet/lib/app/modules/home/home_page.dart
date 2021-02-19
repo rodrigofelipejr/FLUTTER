@@ -33,13 +33,17 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 return AnimatedContainer(
                   duration: Duration(seconds: 1),
                   decoration: BoxDecoration(
-                    color: status ? kGreen.withAlpha(155) : kRed.withAlpha(155),
+                    color: status != null
+                        ? status
+                            ? kGreen.withAlpha(155)
+                            : kRed.withAlpha(155)
+                        : kGrey.withAlpha(155),
                   ),
                   padding: const EdgeInsets.all(8.0),
                   width: double.infinity,
                   child: Center(
                     child: Text(
-                      "${status ? 'INTERNET ON' : 'INTERNET OFF'}",
+                      "${status != null ? status ? 'ON' : 'OFF' : 'UNKNOWN'}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 32.0,

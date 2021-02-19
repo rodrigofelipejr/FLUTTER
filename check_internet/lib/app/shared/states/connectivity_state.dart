@@ -16,10 +16,8 @@ abstract class _ConnectivityStateBase with Store {
 
   _ConnectivityStateBase() {
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult connectivityResult) async {
-      print("listen: $connectivityResult");
       _timer?.cancel();
       _timer = Timer(Duration(seconds: 4), () async {
-        print("run timer...");
         _statusStream = connectivityResult != null && connectivityResult != ConnectivityResult.none;
         if (_statusStream) {
           await Future.delayed(Duration(seconds: 4));
@@ -36,14 +34,8 @@ abstract class _ConnectivityStateBase with Store {
 
   bool _statusStream;
 
-  @computed
-  bool get getStatusConnection {
-    print("_statusStream: $_statusStream - connectionStatus: $connectionStatus");
-    return _statusStream == true && connectionStatus == true;
-  }
-
   @observable
-  bool connectionStatus = false;
+  bool connectionStatus;
   @action
   void setConnectionStatus(bool value) => connectionStatus = value;
 

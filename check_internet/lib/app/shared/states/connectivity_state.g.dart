@@ -19,14 +19,6 @@ final $ConnectivityState = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ConnectivityState on _ConnectivityStateBase, Store {
-  Computed<bool> _$getStatusConnectionComputed;
-
-  @override
-  bool get getStatusConnection => (_$getStatusConnectionComputed ??=
-          Computed<bool>(() => super.getStatusConnection,
-              name: '_ConnectivityStateBase.getStatusConnection'))
-      .value;
-
   final _$connectionStatusAtom =
       Atom(name: '_ConnectivityStateBase.connectionStatus');
 
@@ -68,8 +60,7 @@ mixin _$ConnectivityState on _ConnectivityStateBase, Store {
   @override
   String toString() {
     return '''
-connectionStatus: ${connectionStatus},
-getStatusConnection: ${getStatusConnection}
+connectionStatus: ${connectionStatus}
     ''';
   }
 }
