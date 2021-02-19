@@ -1,15 +1,17 @@
 # Verificando conexão a internet*
 
-Utilizando o package [connectivity](https://pub.dev/packages/connectivity) para verificar a conexão com a internet.
+Utilizando o package [connectivity](https://pub.dev/packages/connectivity) para verificar a conexão com a internet. (***ObservableStream***)
 
 Outros packages utilizados:
 
-- [asuka](https://pub.dev/packages/asuka) (BottomSheet)
+- [mobx](https://pub.dev/packages/mobx)
+- [flutter_modular](https://pub.dev/packages/flutter_modular)
+- 
 
 - Testes
-  - Se iniciar desconectado                               OK
-  - Se iniciar conectado                                  OK
-  - Se alterar de **mobile** para **wifi**                OK
-  - Se alterar de **wifi** para **mobile**                OK
-  - Se alterar de conectado para desconectado             OK
-  - Se alterar de desconectado para conectado             OK
+  - Iniciar desconectado                               OK
+  - Iniciar conectado                                  OK
+  - Alterar de **mobile** para **wifi**                OK
+  - Alterar de **wifi** para **mobile**                OK
+  - Alterar de conectado para desconectado             OK
+  - Alterar de desconectado para conectado             OK
