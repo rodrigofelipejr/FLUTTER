@@ -1,12 +1,18 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 
 class ConnectivityChangeNotifier extends ChangeNotifier {
   ConnectivityChangeNotifier() {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      resultHandler(result);
+      preResultHandler(result);
     });
   }
+
+  bool _resultTest;
+  Timer _timerConnectionTest;
 
   ConnectivityResult _connectivityResult = ConnectivityResult.none;
   ConnectivityResult get connectivity => _connectivityResult;
@@ -17,7 +23,26 @@ class ConnectivityChangeNotifier extends ChangeNotifier {
   String _pageText = 'Oops.. Verifique a sua conexão com a rede!';
   String get pageText => _pageText;
 
-  void resultHandler(ConnectivityResult result) {
+  void preResultHandler(ConnectivityResult result) {
+    _timerConnectionTest?.cancel();
+
+    if (_connectivityResult == ConnectivityResult.none && result != ConnectivityResult.none)
+      _timerConnectionTest = Timer(const Duration(seconds: 4), () => resultHandler(result));
+    else
+      resultHandler(result);
+  }
+
+  void resultHandler(ConnectivityResult result) async {
+    _resultTest = await _connectionTest();
+
+    if (_resultTest != null && !_resultTest) {
+      _svgUrl = 'assets/disconnected.svg';
+      _pageText = 'Oops.. Verifique a sua conexão com a rede!';
+      _connectivityResult = ConnectivityResult.none;
+      notifyListeners();
+      return;
+    }
+
     switch (result) {
       case ConnectivityResult.none:
         _svgUrl = 'assets/disconnected.svg';
@@ -31,8 +56,18 @@ class ConnectivityChangeNotifier extends ChangeNotifier {
         _svgUrl = 'assets/connected_wifi.svg';
         _pageText = 'Conectado a uma rede wi-fi!';
     }
-    notifyListeners();
+
     _connectivityResult = result;
+    notifyListeners();
+  }
+
+  Future<bool> _connectionTest() async {
+    try {
+      final result = await InternetAddress.lookup('1.1.1.1').timeout(Duration(seconds: 5));
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty ? true : false;
+    } on SocketException catch (_) {
+      return false;
+    }
   }
 
   void initialLoad() async {

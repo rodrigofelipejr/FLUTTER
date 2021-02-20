@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
         brightness: Brightness.light,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Center(
           child: Consumer<ConnectivityChangeNotifier>(
               builder: (BuildContext context, ConnectivityChangeNotifier connectivityChangeNotifier, Widget child) {
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w700,
-                        color: Color(0XFF63ddff),
+                        color: Colors.grey[600],
                       ),
                     ),
                   ),
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Flexible(
                     child: RaisedButton(
                       child: Text('Abrir configurações'),
-                      onPressed: () => AppSettings.openAppSettings(),
+                      onPressed: () => AppSettings.openWIFISettings(),
                     ),
                   )
               ],
