@@ -2,53 +2,39 @@
 
 ## #1 - Primeiro a Arquitetura
 
-Repositório com proposta de arquitetura limpa para o Dart/Flutter:
+Repositório com proposta de arquitetura limpa para o Dart/Flutter: [Clean Dart](https://github.com/Flutterando/Clean-Dart)
 
-[Clean Dart](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbWk5SmIzdUp6U0tHNFpraDlIYk1JUDBodEM4Z3xBQ3Jtc0tteU1xOTNoSjhtaTg0alhsV1JDM1ZJM2twUlltT0k1V1hqZzN4Z2dDY3JUWmExX19aRWQzRnlfR2RfTXJVbE1jQjhEVjVCUmRnSWpvcnVMaG12UGk5MVVHejVIOGx3WXVyQlg5MWhzaXFEeWhKaFJSbw&q=https%3A%2F%2Fgithub.com%2FFlutterando%2FClean-Dart)
+## Clean Dart
 
-### Modelos
+![alt text](./img/img1.png "Title")
+ 
+## Presenter
 
-- Modelo 1 (MVC)
-  - UI 
-  - ViewModel
-  - Repository
+- A Camada Presenter fica responsável por declarar as entradas, saídas e interações da aplicação.
+- Usando o Flutter como exemplo, hospedaremos os Widgets, Pages e também alguma Gerência de Estado.
 
-- Modelo 2
-  - UI 
-  - ViewModel (Bloc, Store) 
-  - Use cases (Regras de negócio) & Entity (ou Model)
-  - Repository (Enviar para use cases)
-  - Data source (acessar os dados externos)
+## Domain
 
-  - Divisões
-    - (Use cases + Entity) => DOMAIN => Testes unitários
-    - (Repository) => (suporte ao domínio) => INFRA => Testes unitários
+- A camada de Domain hospedará as regras de negócio corporativa (Entity) e da aplicação (Usecase).
 
-    - (Use cases + Entity) + (Repository) => CORE
+- Nossas entidades devem ser objetos simples podendo conter regras de validação dos seus dados por meio de funções ou ValueObjects. **A Entidade não deve usar nenhum Objeto das outras camadas**.
 
-- Modelo 3
+- Os casos de uso devem executar a lógica necessária para resolver o problema. Se o caso de uso precisar de algum acesso externo, então esse acesso deve ser feito por meio de contratos de interfaces, que serão implementados em uma camada de mais baixo nível.
 
-  - PRESENTER
-    - Ui
-    - Output
-  
-  - DOMAIN
-    - Implementation
-      - Entities
-      - Use cases
-    - Interfaces
-      - Repositories
-      - Services
-  
-  - INFRA
-    - Implementations
-      - Repositories
-      - Services
-    - Interfaces
-      - Data sources
-      - Drivers
+- A camada Domain deve ser responsável apenas pela execução da lógica de negócio, não deve haver implementações de outros objetos como: **Repositories** ou **Services** dentro do Domain.
 
-  - EXTERNAL
-    - Implementations
-      - Data sources
-      - Drivers
+- Tomando um Repository como exemplo, teremos que ter apenas o contrato de interfaces (Abstrações) e a responsabilidade de implementação desse objeto deverá ser repassado a outra camada mais baixa.
+
+## Infrastructure (Infra)
+
+- Está camada dá suporte a camada Domain implementando suas interfaces. Para isso, essa camada se propõem a adaptar os dados externos para que possa cumprir os contratos do domínio.
+
+- Muito provavelmente nessa camada iremos implementar alguma interface de um **Repository** ou **Services** que pode ou não depender de dados externos como uma API ou acesso a algum ***Hardware*** como por exemplo ***Bluetooth***.
+
+- Para que o **Repository** possa processar e adaptar os dados externos devemos criar contratos para esses serviços visando passar a responsabilidade de implementação para a camada mais baixa da nossa arquitetura.
+
+- Como sugestão, iremos criar objetos de **DataSource** quando quisermos acessar um dado externo, uma BaaS como ***Firebase*** ou um Cache Local usando ***SQLite*** por exemplo. 
+
+- Outra sugestão seria criar objetos denominados **Drivers** para interfacear a comunicação com algum **Hardware** do dispositivo.
+
+- Os acessos externos como* **Data sources** e **Drivers** devem ser implementados por outra camada, ficando apenas os contratos de interface nesta camada de **Infra**.
