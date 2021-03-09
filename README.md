@@ -6,7 +6,7 @@ Repositório com proposta de arquitetura limpa para o Dart/Flutter: [Clean Dart]
 
 ## Clean Dart
 
-![alt text](./img/img1.png "Title")
+![alt text](./img/img1.png "Clean Dart 1")
  
 ## Presenter
 
@@ -33,8 +33,39 @@ Repositório com proposta de arquitetura limpa para o Dart/Flutter: [Clean Dart]
 
 - Para que o **Repository** possa processar e adaptar os dados externos devemos criar contratos para esses serviços visando passar a responsabilidade de implementação para a camada mais baixa da nossa arquitetura.
 
-- Como sugestão, iremos criar objetos de **DataSource** quando quisermos acessar um dado externo, uma BaaS como ***Firebase*** ou um Cache Local usando ***SQLite*** por exemplo. 
+- Como sugestão, iremos criar objetos de **Data Source** quando quisermos acessar um dado externo, uma BaaS como ***Firebase*** ou um Cache Local usando ***SQLite*** por exemplo. 
 
 - Outra sugestão seria criar objetos denominados **Drivers** para interfacear a comunicação com algum **Hardware** do dispositivo.
 
 - Os acessos externos como* **Data sources** e **Drivers** devem ser implementados por outra camada, ficando apenas os contratos de interface nesta camada de **Infra**.
+
+
+## External
+
+- Aqui começaremos a implementar os acessos externos e que dependem de um hardware, package ou acesso muito específico.
+
+- Basicamente a camada External deve conter tudo aquilo que terá grandes chances de ser alterado sem que o programador possa intervir diretamente no projeto.
+
+- No Flutter por exemplo, para cache local usamos o ***SharedPreferences***, mas talvez em alguma estágio do projeto a implementação do ***SharedPreferences*** não seja mais suficiente para a aplicação e deve ser substituída por outro package como ***Hive***, nesse ponto a única coisa que precisamos fazer é criar uma nova classe, implementando o Contrato esperado pela camada mais alta (***que seria a Infra***) e implementarmos a Lógica usando o Hive.
+
+- Um outro exemplo prático seria pensar em um Login com Firebase Auth, porém outro produto deseja utilizar um outro provider de autenticação. Bastaria apenas implementar um data source baseado no outro provider e **“Inverter a Dependência”** substituindo a implementação do Firebase pela nova quando for necessário.
+
+Os Data sources devem se preocupar apenas em “descobrir” os dados externos e enviar para a camada de Infra para serem tratados.
+
+Da mesma forma os objetos **Drivers** devem apenas retornar as informações solicitadas sobre o Hardware do Device e não devem fazer tratamento fora ao que lhe foi solicitado no contrato.
+
+![alt text](./img/img2.png "Clean Dart 2s")
+
+## Dicas
+
+### Pense por camada
+
+Quando for desenvolver comece a pensar por camada, não devemos nos preocupar com o que tem na camada de **Presenter** ou **External** por exemplo. Se pensarmos nas camadas mais externas podemos acabar nos orientando (erroneamente) por essas camadas. Assim, devemos nos acostumar a desenvolver camada por camada, de dentro para fora e não ao contrário.
+
+Talvez no começo da sua jornada "Limpa" algumas camadas possam parecer "sem utilidade", isso acontece quando nossa mente ainda não está Pensando em Camadas (ou porque sua Regra de Negócio é simples demais para isso).
+
+### Teste de Unidade será sua nova UI
+
+### Gaste mais tempo tratando erros
+
+### Não caia na tentação de furar uma camada
