@@ -6,4 +6,4 @@ class ResultSearch {
   ResultSearch({this.image, this.title, this.content});
 }
 
-// Nossa entidade deve ser o mais pura possível, sem o maps por exemplo...
+// Nossa entidade deve ser o mais pura possível, sem o maps por exemplo... (modelo mais anêmico)
