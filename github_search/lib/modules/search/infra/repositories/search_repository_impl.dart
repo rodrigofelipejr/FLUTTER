@@ -4,9 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:github_search/modules/search/domain/repositories/search_repository.dart';
 import 'package:github_search/modules/search/infra/datasources/search_datasource.dart';
 
+// O trabalho do nosso repositórios é receber um objeto externo e interfacear ele para que o domínio (use case) reconheça.
 class SearchRepositoryImpl implements SearchRepository {
-  // O trabalho do nosso repositórios é receber um objeto externo e interfacear ele para que o domínio (use case) reconheça.
-
   final SearchDatasource datasource;
 
   SearchRepositoryImpl(this.datasource);
