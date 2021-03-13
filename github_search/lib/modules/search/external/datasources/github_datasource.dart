@@ -12,7 +12,9 @@ class GithubDatasource implements SearchDatasource {
   Future<List<ResultSearchModel>> getSearch(String searchText) async {
     final response = await dio.get("https://api.github.com/search/users?q=${_normalizeText(searchText)}");
     if (response.statusCode == 200) {
-      return (response.data['items'] as List).map((e) => ResultSearchModel.fromMap(e)).toList();
+      return (response.data['items'] as List).map((e) {
+        return ResultSearchModel.fromMap(e);
+      }).toList();
     } else {
       throw DatasourceError();
     }

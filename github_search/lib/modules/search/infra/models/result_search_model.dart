@@ -4,31 +4,36 @@ import 'package:github_search/modules/search/domain/entities/result_search.dart'
 
 /* princípio do abeto e fechado */
 class ResultSearchModel extends ResultSearch {
-  final String image;
-  final String title;
-  final String content;
+  String image;
+  String title;
 
-  ResultSearchModel(this.image, this.title, this.content);
+  ResultSearchModel(this.image, this.title);
 
   Map<String, dynamic> toMap() {
     return {
       'image': image,
       'title': title,
-      'content': content,
     };
   }
 
   factory ResultSearchModel.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
+    print(ResultSearchModel(
+      map['avatar_url'],
+      map['login'],
+    ).toString());
+
     return ResultSearchModel(
-      map['image'],
-      map['title'],
-      map['content'],
+      map['avatar_url'],
+      map['login'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory ResultSearchModel.fromJson(String source) => ResultSearchModel.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'ResultSearchModel(image: $image, title: $title)';
 }
