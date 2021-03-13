@@ -6,7 +6,7 @@ import 'package:github_search/modules/search/domain/errors/errors.dart';
 import 'package:github_search/modules/search/external/datasources/github_datasource.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../utils/github_response.dart';
+import '../../../utils/github_response.dart';
 
 class DioMock extends Mock implements Dio {}
 
