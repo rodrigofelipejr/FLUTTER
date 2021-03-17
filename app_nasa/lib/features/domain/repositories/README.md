@@ -1,0 +1,1 @@
+- Apenas abstrações, utilizadas nos repositórios do datasource (data/repositories)

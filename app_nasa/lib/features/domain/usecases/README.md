@@ -1,0 +1,1 @@
+- Chamadas para os repositórios e validações

@@ -1,0 +1,2 @@
+- Todas as entidades internas do app
+- Não necessariamente um modelo anêmico
