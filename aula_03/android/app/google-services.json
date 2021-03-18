@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "889062877015",
+    "project_id": "zero-to-hero-7180c",
+    "storage_bucket": "zero-to-hero-7180c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889062877015:android:987fb53811e52d944b8012",
+        "android_client_info": {
+          "package_name": "br.com.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889062877015-nsok7f3jr1s8g8ajjo7juoico4g3cpqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ0siTozbXwu_4JJJ4ZTMGqmNm3gUHHo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889062877015-nsok7f3jr1s8g8ajjo7juoico4g3cpqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
