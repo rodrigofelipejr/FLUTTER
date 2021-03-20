@@ -1,16 +1,47 @@
-import 'package:aula_03/home/repositories/home_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:aula_03/shared/constants.dart';
+import 'package:hasura_connect/hasura_connect.dart';
+
+import 'home_repository.dart';
 
 class HomeRepositoryImpl extends HomeRepository {
-  CollectionReference get tarefas => FirebaseFirestore.instance.collection('/tarefas');
+  final _client = HasuraConnect(HASURA_URL);
 
   @override
   Future<List<Map>> getTarefas() async {
-    return (await tarefas.get()).docs.map((e) => {"name": e.data()!['name']}).toList();
+    final response = await _client.query('''
+      query MyQuery {
+        posts {
+          id
+          name
+        }
+      }    
+    ''');
+
+    return (response['data']['posts'] as List).map((e) => {'name': e['name']}).toList();
   }
 
   @override
-  Stream<List<Map>> streamTarefas() {
-    return tarefas.snapshots().map((e) => e.docs.map((e) => {"name": e.data()!['name']}).toList());
+  Stream streamTarefas() {
+    // TODO: implement streamTarefas
+    throw UnimplementedError();
+  }
+
+  streamTarefas2() async {
+    String docSubscription = '''
+    subscription{
+      posts {
+        id
+        name
+        photo
+      }
+    }
+    ''';
+
+    Snapshot snapshot = await _client.subscription(docSubscription);
+    snapshot.listen((data) {
+      print(data);
+    }).onError((err) {
+      print(err);
+    });
   }
 }

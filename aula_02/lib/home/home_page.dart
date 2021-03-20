@@ -1,4 +1,4 @@
-import 'package:aula_03/home/repositories/home_repository_impl.dart';
+import 'package:aula_02/home/repositories/home_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,8 +52,8 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            FutureBuilder<List<Map>>(
-              future: repository.getTarefas(),
+            StreamBuilder<List<Map>>(
+              stream: repository.streamTarefas(),
               builder: (context, snapshot) {
                 if (snapshot.hasError)
                   return Center(
@@ -75,29 +75,6 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            // StreamBuilder<List<Map>>(
-            //   stream: repository.streamTarefas2(),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasError)
-            //       return Center(
-            //         child: Text("Oops!"),
-            //       );
-
-            //     if (snapshot.hasData) {
-            //       final list = snapshot.data as List;
-            //       return ListView.builder(
-            //         itemCount: list.length,
-            //         itemBuilder: (context, index) => ListTile(
-            //           title: Text(list[index]['name']),
-            //         ),
-            //       );
-            //     }
-
-            //     return Center(
-            //       child: CircularProgressIndicator(),
-            //     );
-            //   },
-            // ),
           ],
         ),
       ),
