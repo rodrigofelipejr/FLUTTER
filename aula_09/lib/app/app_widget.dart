@@ -1,4 +1,4 @@
-import 'package:aula_09/modules/home/home_page.dart';
+import 'package:aula_09/app/modules/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

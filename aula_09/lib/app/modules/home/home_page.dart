@@ -1,6 +1,6 @@
-import 'package:aula_09/modules/home/home_controller.dart';
-import 'package:aula_09/modules/home/models/post_model.dart';
-import 'package:aula_09/modules/home/repositories/home_repository_impl.dart';
+import 'package:aula_09/app/modules/home/home_controller.dart';
+import 'package:aula_09/app/modules/home/models/post_model.dart';
+import 'package:aula_09/app/modules/home/repositories/home_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
