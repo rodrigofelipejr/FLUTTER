@@ -1,11 +1,11 @@
-import 'package:aula_06/pages/page2/page_two.dart';
+import 'package:aula_07/pages/page2/page_two.dart';
 import 'package:flutter/material.dart';
 
 class CardTileTwo extends StatefulWidget {
   final Data data;
   final VoidCallback onTap;
 
-  const CardTileTwo({Key? key, required this.data, required this.onTap}) : super(key: key);
+  const CardTileTwo({Key key, this.data, this.onTap}) : super(key: key);
 
   @override
   _CardTileTwoState createState() => _CardTileTwoState();

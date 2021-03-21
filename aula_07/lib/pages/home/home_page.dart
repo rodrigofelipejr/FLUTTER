@@ -1,5 +1,5 @@
-import 'package:aula_06/pages/page1/page_one.dart';
-import 'package:aula_06/pages/page2/page_two.dart';
+import 'package:aula_07/pages/page1/page_one.dart';
+import 'package:aula_07/pages/page2/page_two.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("RxDart"),
+          title: Text("Mobx"),
           bottom: TabBar(
             tabs: [
               Tab(
