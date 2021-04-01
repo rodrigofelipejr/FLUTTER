@@ -1,7 +1,6 @@
-import 'package:aula16/app/modules/login/login_state.dart';
-import 'package:aula16/app/modules/login/widgets/form_login_widget.dart';
+import 'package:aula16/app/modules/login/widgets/input_text_widget.dart';
+import 'package:aula16/app/modules/login/widgets/text_button_expanded_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:aula16/app/modules/login/login_store.dart';
 
@@ -56,73 +55,28 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        child: Text(
-                          'EMAIL',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                        ),
+                      InputTextWidget(
+                        label: "EMAIL",
                       ),
                       SizedBox(
                         height: 12.0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12.0),
-                        child: Text(
-                          'SENHA',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.0,
-                          ),
-                        ),
+                      InputTextWidget(
+                        label: "SENHA",
                       ),
-                      TextField(
-                        decoration: InputDecoration(
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                        ),
+                      TextButtonExpandedWidget(
+                        label: "ENTRAR",
+                        onTap: () => null,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 14.0),
-                        child: TextButton(
-                          child: Text(
-                            'ENTRAR',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.green),
-                          ),
-                          onPressed: () {},
-                        ),
+                      TextButtonExpandedWidget(
+                        label: "Esqueci minha senha",
+                        onTap: () => null,
+                        type: TextButtonExpandedType.none,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: TextButton(
-                          child: Text(
-                            'Esqueci minha senha',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: TextButton(
-                          child: Text(
-                            'CRIAR UMA CONTA',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                        ),
+                      TextButtonExpandedWidget(
+                        label: "CRIAR UMA CONTA",
+                        onTap: () => null,
+                        type: TextButtonExpandedType.outline,
                       ),
                     ],
                   ),
