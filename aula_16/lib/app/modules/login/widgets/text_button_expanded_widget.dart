@@ -1,3 +1,4 @@
+import 'package:aula16/app/shared/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 enum TextButtonExpandedType { fill, none, outline }
@@ -16,48 +17,55 @@ class TextButtonExpandedWidget extends StatelessWidget {
 
   static const Map<TextButtonExpandedType, Map<String, dynamic>> _config = {
     TextButtonExpandedType.fill: {
-      "backgroundColor": Colors.green,
+      "backgroundColor": kGreen,
       "textStyle": TextStyle(
+        fontSize: 14.0,
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
       "border": null,
+      "height": 58.0,
     },
     TextButtonExpandedType.none: {
       "backgroundColor": Colors.transparent,
       "textStyle": TextStyle(
-        color: Colors.black54,
+        fontSize: 14.0,
+        color: kGrey3,
         fontWeight: FontWeight.bold,
       ),
       "border": null,
+      "height": 22.0,
     },
     TextButtonExpandedType.outline: {
       "backgroundColor": Colors.transparent,
       "textStyle": TextStyle(
-        color: Colors.black87,
+        fontSize: 14.0,
+        color: kBlack,
         fontWeight: FontWeight.bold,
       ),
       "border": const Border.fromBorderSide(
         BorderSide(
-          color: Colors.black26,
+          color: kGrey1,
         ),
       ),
+      "height": 58.0,
     }
   };
 
   Color get backgroundColor => _config[type]!['backgroundColor'];
   TextStyle get textStyle => _config[type]!['textStyle'];
   Border? get border => _config[type]!['border'];
+  double get height => _config[type]!['height'];
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 52.0,
+        height: height,
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(12.0),
           border: border,
         ),
         child: Center(
