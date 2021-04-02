@@ -17,7 +17,7 @@ main() {
     usecase = GetSpaceMediaFromDateUsecase(spaceMediaRepositoryMock);
   });
 
-  final tSpaceMedia = SpaceMediaEntity(
+  final tSpaceMediaModel = SpaceMediaEntity(
     description: 'Meteors can be colorful. While the human eye usually cannot discern many colors,',
     mediaType: 'image',
     title: 'A Colorful Quadrantid Meteor',
@@ -27,9 +27,9 @@ main() {
   final tDate = DateTime(2021, 02, 02);
   test('should get space media from for a given date from the repository', () async {
     when(spaceMediaRepositoryMock.getSpaceMediaFromDate(tDate))
-        .thenAnswer((_) async => Right<Failure, SpaceMediaEntity>(tSpaceMedia));
+        .thenAnswer((_) async => Right<Failure, SpaceMediaEntity>(tSpaceMediaModel));
     final result = await usecase.call(tDate);
-    expect(result, Right(tSpaceMedia));
+    expect(result, Right(tSpaceMediaModel));
     verify(spaceMediaRepositoryMock.getSpaceMediaFromDate(tDate));
     verifyNoMoreInteractions(spaceMediaRepositoryMock);
   });
