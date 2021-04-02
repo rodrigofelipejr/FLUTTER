@@ -3,44 +3,65 @@ import 'package:flutter/material.dart';
 
 enum InputTextType { email, password, text }
 
-class InputTextWidget extends StatelessWidget {
+typedef String? InputValidate(String value);
+
+class InputTextWidget extends StatefulWidget {
   final String label;
   final InputTextType type;
+  final InputValidate onValidate;
 
   const InputTextWidget({
     Key? key,
     required this.label,
+    required this.onValidate,
     this.type = InputTextType.text,
   }) : super(key: key);
 
-  static const Map<InputTextType, Map<String, dynamic>> _config = {
+  //TODO - configuração static sobre para memória...
+  static final Map<InputTextType, Map<String, dynamic>> _config = {
     InputTextType.email: {
       "suffixIcon": Icon(
         Icons.check_circle_outline_outlined,
         color: kGreen,
       ),
       "textStyle": TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        color: kGrey600,
+      ),
+      "errorTextStyle": TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
-        color: kGrey2,
+        color: kRed,
       ),
       "obscureText": false,
-      "contentPadding": const EdgeInsets.only(top: 28.0, left: 12.0, right: 12.0, bottom: 12.0),
       "keyboardType": TextInputType.emailAddress,
+      "inputBorder": OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4.0),
+        borderSide: BorderSide(color: kGrey400, width: 2.0),
+      ),
     },
     InputTextType.password: {
       "suffixIcon": Icon(
         Icons.visibility,
-        color: kGrey3,
+        color: kGrey500,
       ),
       "textStyle": TextStyle(
-        fontSize: 22.0,
+        fontSize: 16.0,
         fontWeight: FontWeight.w500,
-        color: kGrey2,
+        color: kGrey600,
+      ),
+      "errorTextStyle": TextStyle(
+        fontSize: 14.0,
+        fontWeight: FontWeight.w500,
+        color: kRed,
       ),
       "obscureText": true,
-      "contentPadding": const EdgeInsets.symmetric(vertical: 14.0, horizontal: 12.0),
       "keyboardType": TextInputType.text,
+      "inputBorder": OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4.0),
+        borderSide: BorderSide(color: kGrey400, width: 2.0),
+      ),
     },
     InputTextType.text: {
       "suffixIcon": Icon(
@@ -48,25 +69,47 @@ class InputTextWidget extends StatelessWidget {
         color: kGreen,
       ),
       "textStyle": TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w500,
+        color: kGrey600,
+      ),
+      "errorTextStyle": TextStyle(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
-        color: kGrey2,
+        color: kRed,
       ),
       "obscureText": false,
-      "contentPadding": const EdgeInsets.only(top: 28.0, left: 12.0, right: 12.0, bottom: 12.0),
       "keyboardType": TextInputType.text,
+      "inputBorder": OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4.0),
+        borderSide: BorderSide(color: kGrey400, width: 2.0),
+      ),
     }
   };
 
-  InputBorder get inputBorder => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4.0),
-        borderSide: BorderSide(color: kGrey1, width: 2.0),
-      );
-  TextStyle get textStyle => _config[type]!['textStyle'];
-  Widget get suffixIcon => _config[type]!['suffixIcon'];
-  bool get obscureText => _config[type]!['obscureText'];
-  EdgeInsetsGeometry get contentPadding => _config[type]!['contentPadding'];
-  TextInputType get keyboardType => _config[type]!['keyboardType'];
+  @override
+  _InputTextWidgetState createState() => _InputTextWidgetState();
+}
+
+class _InputTextWidgetState extends State<InputTextWidget> {
+  //TODO - criar uma classe só com as configurações
+  InputBorder get inputBorder => InputTextWidget._config[widget.type]!['inputBorder'];
+  TextStyle get textStyle => InputTextWidget._config[widget.type]!['textStyle'];
+  Widget get suffixIcon => InputTextWidget._config[widget.type]!['suffixIcon'];
+  bool get obscureText => InputTextWidget._config[widget.type]!['obscureText'];
+  EdgeInsetsGeometry get contentPadding => InputTextWidget._config[widget.type]!['contentPadding'];
+  TextInputType get keyboardType => InputTextWidget._config[widget.type]!['keyboardType'];
+  TextStyle get errorTextStyle => InputTextWidget._config[widget.type]!['errorTextStyle'];
+  double get height => _error != null ? 72.0 : 48.0;
+
+  void onChangeValidade(String value) {
+    if (value.isNotEmpty)
+      setState(() {
+        _error = widget.onValidate(value);
+      });
+  }
+
+  String? _error;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +119,7 @@ class InputTextWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 10.0),
           child: Text(
-            label,
+            widget.label,
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 12.0,
@@ -84,13 +127,16 @@ class InputTextWidget extends StatelessWidget {
           ),
         ),
         Container(
-          height: 48.0,
+          constraints: BoxConstraints(
+            minHeight: height,
+          ),
           child: TextField(
             obscureText: obscureText,
             keyboardType: keyboardType,
             style: textStyle,
+            cursorHeight: 16.0,
+            onChanged: onChangeValidade,
             decoration: InputDecoration(
-              contentPadding: contentPadding,
               suffixIcon: suffixIcon,
               enabledBorder: inputBorder,
               disabledBorder: inputBorder,
@@ -98,6 +144,8 @@ class InputTextWidget extends StatelessWidget {
               focusedBorder: inputBorder,
               focusedErrorBorder: inputBorder,
               border: inputBorder,
+              errorText: _error,
+              errorStyle: errorTextStyle,
             ),
           ),
         ),

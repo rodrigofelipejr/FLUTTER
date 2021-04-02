@@ -11,6 +11,7 @@ class _AppWidgetState extends ModularState<AppWidget, AppStore> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'App',
       theme: ThemeData(primarySwatch: Colors.blue),
     ).modular();

@@ -62,7 +62,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                         child: Text(
                           'Mantenha seus gastos em dia',
                           style: TextStyle(
-                            color: kGrey3,
+                            color: kGrey500,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w400,
                           ),
@@ -71,11 +71,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                       InputTextWidget(
                         label: "EMAIL",
                         type: InputTextType.email,
+                        onValidate: (value) => value.contains("@") ? null : "Não pode ser vazio",
                       ),
                       SizedBox(height: 18.0),
                       InputTextWidget(
                         label: "SENHA",
                         type: InputTextType.password,
+                        onValidate: (value) => value.length >= 6 ? null : "A senha deve conter no mín. 6 caracteres",
                       ),
                       SizedBox(height: 18.0),
                       TextButtonExpandedWidget(

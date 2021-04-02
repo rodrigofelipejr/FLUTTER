@@ -30,7 +30,7 @@ class TextButtonExpandedWidget extends StatelessWidget {
       "backgroundColor": Colors.transparent,
       "textStyle": TextStyle(
         fontSize: 14.0,
-        color: kGrey3,
+        color: kGrey500,
         fontWeight: FontWeight.bold,
       ),
       "border": null,
@@ -45,7 +45,7 @@ class TextButtonExpandedWidget extends StatelessWidget {
       ),
       "border": const Border.fromBorderSide(
         BorderSide(
-          color: kGrey1,
+          color: kGrey400,
         ),
       ),
       "height": 58.0,
