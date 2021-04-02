@@ -1,0 +1,16 @@
+class LoginValidators {
+  static String? email(String value) {
+    bool isEmailValid =
+        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}").hasMatch(value);
+    return isEmailValid ? null : "E-mail inválido";
+  }
+
+  static String? password(String value) {
+    //TODO - melhorar validações
+    if (value.length >= 6) {
+      return null;
+    } else {
+      return "A senha deve conter no mín. 6 caracteres";
+    }
+  }
+}
