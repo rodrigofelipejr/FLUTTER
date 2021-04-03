@@ -1,0 +1,61 @@
+name: ifood
+description: A new Flutter project.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_svg: 0.21.0-nullsafety.0
+  flutter_tab_indicator_styler: 2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - "assets/icons/"
+    - "assets/images/"
+  fonts:
+    - family: "Nunito Sans"
+      fonts:
+        - asset: "assets/fonts/nunito/NunitoSans-ExtraLightItalic.ttf"
+          style: "italic"
+          weight: 200
+        - asset: "assets/fonts/nunito/NunitoSans-ExtraLight.ttf"
+          weight: 200
+        - asset: "assets/fonts/nunito/NunitoSans-LightItalic.ttf"
+          style: "italic"
+          weight: 300
+        - asset: "assets/fonts/nunito/NunitoSans-Light.ttf"
+          weight: 300
+        - asset: "assets/fonts/nunito/NunitoSans-Italic.ttf"
+          style: "italic"
+          weight: 400
+        - asset: "assets/fonts/nunito/NunitoSans-Regular.ttf"
+          weight: 400
+        - asset: "assets/fonts/nunito/NunitoSans-SemiBoldItalic.ttf"
+          style: "italic"
+          weight: 600
+        - asset: "assets/fonts/nunito/NunitoSans-SemiBold.ttf"
+          weight: 600
+        - asset: "assets/fonts/nunito/NunitoSans-BoldItalic.ttf"
+          style: "italic"
+          weight: 700
+        - asset: "assets/fonts/nunito/NunitoSans-Bold.ttf"
+          weight: 700
+        - asset: "assets/fonts/nunito/NunitoSans-ExtraBoldItalic.ttf"
+          style: "italic"
+          weight: 800
+        - asset: "assets/fonts/nunito/NunitoSans-ExtraBold.ttf"
+          weight: 800
+        - asset: "assets/fonts/nunito/NunitoSans-BlackItalic.ttf"
+          style: "italic"
+          weight: 900
+        - asset: "assets/fonts/nunito/NunitoSans-Black.ttf"
+          weight: 900
