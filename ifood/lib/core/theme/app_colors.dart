@@ -17,6 +17,7 @@ class AppColors {
 
   static const Color kBlack = Color(0XFF3E3E3E);
   static const Color kBlack54 = Colors.black54;
+  static const Color kWhite = Colors.white;
 }
  
 
