@@ -13,15 +13,14 @@ class BottomNavigatorItemWidget extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.activeIcon,
-    this.isActive = false,
     this.onTap,
+    this.isActive = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => onTap,
-      onTap: () => print(123),
+      onTap: () => onTap!(),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
