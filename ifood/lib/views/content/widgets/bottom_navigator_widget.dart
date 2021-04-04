@@ -31,9 +31,6 @@ class BottomNavigatorWidget extends StatelessWidget {
                     ))
                 .toList(),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).padding.bottom,
-          )
         ],
       ),
     );

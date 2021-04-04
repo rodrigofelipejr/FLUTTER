@@ -10,6 +10,19 @@ class HeaderLocationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      delegate: _HeaderLocationWidgetDelegate(location),
+    );
+  }
+}
+
+class _HeaderLocationWidgetDelegate extends SliverPersistentHeaderDelegate {
+  final String location;
+
+  _HeaderLocationWidgetDelegate(this.location);
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Row(
       children: [
         Padding(
@@ -27,4 +40,13 @@ class HeaderLocationWidget extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  double get maxExtent => 36;
+
+  @override
+  double get minExtent => 36;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
 }
