@@ -28,11 +28,11 @@ mixin _$TodoStore on _TodoStoreBase, Store {
       ActionController(name: '_TodoStoreBase');
 
   @override
-  void toogleDone() {
+  void toggleDone() {
     final _$actionInfo = _$_TodoStoreBaseActionController.startAction(
         name: '_TodoStoreBase.toogleDone');
     try {
-      return super.toogleDone();
+      return super.toggleDone();
     } finally {
       _$_TodoStoreBaseActionController.endAction(_$actionInfo);
     }

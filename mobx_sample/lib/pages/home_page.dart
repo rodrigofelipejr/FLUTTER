@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                                         color: todo.done ? Colors.grey : Colors.black,
                                       ),
                                     ),
-                                    onTap: todo.toogleDone,
+                                    onTap: todo.toggleDone,
                                   );
                                 });
                               },

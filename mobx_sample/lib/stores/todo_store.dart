@@ -12,5 +12,5 @@ abstract class _TodoStoreBase with Store {
   bool done = false;
 
   @action
-  void toogleDone() => done = !done;
+  void toggleDone() => done = !done;
 }
