@@ -1,3 +1,3 @@
-# FLUTTER - LEARNING
+# Learning Flutter
 
 Switch between branches...
